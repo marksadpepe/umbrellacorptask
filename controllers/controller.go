@@ -14,19 +14,19 @@ type Service interface {
   DaysLeft() int
 }
 
-type Endpoint struct {
+type Controller struct {
   service Service
 }
 
-func NewEndpoint(s Service) Endpoint {
-  return Endpoint{s}
+func NewController(s Service) Controller {
+  return Controller{s}
 }
 
-func (e *Endpoint) HandleRequest(c echo.Context) error {
-  daysLeft := e.service.DaysLeft()
+func (c *Controller) HandleRequest(ctx echo.Context) error {
+  daysLeft := c.service.DaysLeft()
   res := ResponseMessage{daysLeft}
 
-  err := c.JSON(http.StatusOK, res)
+  err := ctx.JSON(http.StatusOK, res)
   if err != nil {
     return err
   }
