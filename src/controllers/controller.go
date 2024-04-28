@@ -1,35 +1,35 @@
 package controllers
 
 import (
-  "net/http"
+	"net/http"
 
-  "github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4"
 )
 
 type ResponseMessage struct {
-  DaysLeft int `json:"daysLeft"`
+	DaysLeft int `json:"daysLeft"`
 }
 
 type Service interface {
-  DaysLeft() int
+	DaysLeft() int
 }
 
 type Controller struct {
-  service Service
+	service Service
 }
 
 func NewController(s Service) Controller {
-  return Controller{s}
+	return Controller{s}
 }
 
 func (c *Controller) HandleRequest(ctx echo.Context) error {
-  daysLeft := c.service.DaysLeft()
-  res := ResponseMessage{daysLeft}
+	daysLeft := c.service.DaysLeft()
+	res := ResponseMessage{daysLeft}
 
-  err := ctx.JSON(http.StatusOK, res)
-  if err != nil {
-    return err
-  }
+	err := ctx.JSON(http.StatusOK, res)
+	if err != nil {
+		return err
+	}
 
-  return nil
+	return nil
 }
