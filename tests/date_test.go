@@ -4,7 +4,7 @@ import (
   "time"
   "testing"
 
-  "gitlab.com/croc3/umbrellacorptask/services"
+  "gitlab.com/croc3/umbrellacorptask/src/services"
 )
 
 var janFirst = time.Date(2025, time.Month(1), 1, 0, 0, 0, 0, time.UTC)
